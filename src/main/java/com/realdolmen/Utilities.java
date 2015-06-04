@@ -10,6 +10,10 @@ public class Utilities {
      * @return The greatest common factor of the two specified integers.
      */
     public static int greatestCommonFactor(int a, int b) {
+        if(a == 0 && b == 0) {
+            throw new ArithmeticException("GCF(0, 0) is undefined");
+        }
+
         if(a == 0 || b == 0) {
             return 1;
         }
