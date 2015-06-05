@@ -12,6 +12,10 @@ public class Fraction {
         simplify();
     }
 
+    public Fraction reciprocal() {
+        return new Fraction(this.denominator, this.numerator);
+    }
+
     private void simplify() {
         int gcf = Utilities.greatestCommonFactor(numerator, denominator);
         numerator = numerator / gcf;
@@ -28,7 +32,10 @@ public class Fraction {
 
     @Override
     public boolean equals(Object o) {
-        Fraction that = (Fraction)o;
+        return o instanceof Fraction && equals((Fraction) o);
+    }
+
+    private boolean equals(Fraction that) {
         return this.denominator == that.denominator && this.numerator == that.numerator;
     }
 

@@ -5,17 +5,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.fail;
 
 public class FractionTest {
-    @Test
+    @Test(expected = ArithmeticException.class)
     public void denominatorMustNotBeZero() throws Exception {
-        try {
-            new Fraction(1, 0);
-            fail("Exception was expected");
-        }catch (ArithmeticException e) {
-            assertEquals("Denominator must not be zero", e.getMessage());
-        }
+        new Fraction(1, 0);
     }
 
     @Test
@@ -23,6 +17,13 @@ public class FractionTest {
         Fraction f = new Fraction(3 * 3 * 5, 3 * 5 * 7);
         Assert.assertEquals(3, f.numerator());
         Assert.assertEquals(7, f.denominator());
+    }
+
+    @Test
+    public void fractionIsSimplified() throws Exception {
+        Fraction f = new Fraction(2, 10);
+        assertEquals(1, f.numerator());
+        assertEquals(5, f.denominator());
     }
 
     @Test
@@ -38,31 +39,23 @@ public class FractionTest {
     }
 
     @Test
-    public void fractionIsSimplified() throws Exception {
-        Fraction f = new Fraction(2, 10);
-        assertEquals(1, f.numerator());
-        assertEquals(5, f.denominator());
-    }
-
-    @Test
     public void equalsReturnsTrueIfBothAreEqual() throws Exception {
-        Fraction a = new Fraction(37, 144);
-        Fraction b = new Fraction(37*7, 144*7);
-        assertEquals(a, b);
+        assertEquals(new Fraction(37, 144), new Fraction(37*7, 144*7));
     }
 
     @Test
     public void equalsReturnsFalseIfBothAreNotEqual() throws Exception {
-        Fraction a = new Fraction(1, 5);
-        Fraction b = new Fraction(2, 7);
-        assertNotEquals(a, b);
+        assertNotEquals(new Fraction(1, 5), new Fraction(2, 7));
     }
 
     @Test
     public void equalsReturnsTrueIfBothSimplifyToSameValue() throws Exception {
-        Fraction a = new Fraction(1, 2);
-        Fraction b = new Fraction(2, 4);
-        assertEquals(a, b);
+        assertEquals(new Fraction(1, 2), new Fraction(2, 4));
+    }
+
+    @Test
+    public void equalsReturnsFalseIfClassIsNotTheSame() throws Exception {
+        assertNotEquals(new Fraction(1, 2), "Ceci n'est pas une Fraction");
     }
 
     @Test

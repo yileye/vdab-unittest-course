@@ -22,7 +22,6 @@ public class JdbcPersonRepository implements PersonRepository {
      `birthDate` date DEFAULT NULL,
      PRIMARY KEY (`id`)
      ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-     SELECT * FROM test.people;
     */
 
     private Logger logger = LoggerFactory.getLogger(getClass());
