@@ -1,11 +1,15 @@
 package com.realdolmen;
 
-import junit.framework.Assert;
+import org.junit.Assert;
+import org.junit.Assume;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Matchers;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assume.*;
+import static org.mockito.Matchers.*;
 
 public class UtilitiesTest {
     @Test
@@ -34,12 +38,14 @@ public class UtilitiesTest {
     }
 
     @Test
+    @Ignore("Uncool test is disbled")
     public void greatestCommonFactorOfZeroAndZeroIsUndefined() throws Exception {
         try {
             Utilities.greatestCommonFactor(0, 0);
-            assertFalse(true);
+            Assert.fail("Exception should have been thrown");
         } catch(ArithmeticException e) {
             assertEquals("GCF(0, 0) is undefined", e.getMessage());
         }
+        double d = 1.0 / 3.0;
     }
 }
